@@ -64,7 +64,7 @@
         <a href="{{ route('events') }}" class="text-gray-700 hover:text-indigo-600">Events</a>
         <a href="{{ route('membership') }}" class="text-gray-700 hover:text-indigo-600">Membership</a>
         <a href="{{ route('contact') }}" class="text-gray-700 hover:text-indigo-600">Contact</a>
-        <a href="{{ route('login') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Login</a>
+        <a href="{{ route('filament.admin.auth.login') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full">Login</a>
       </div>
     </div>
   </div>

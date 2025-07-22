@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Tables\Columns\BadgeColumn;
 
 class MembershipResource extends Resource
 {
@@ -20,73 +21,72 @@ class MembershipResource extends Resource
     {
         return $form
             ->schema([
-                // Personal Information
-                Forms\Components\TextInput::make('first_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('last_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
-                    ->required()
-                    ->maxLength(20),
-                Forms\Components\Select::make('gender')
-                    ->options([
-                        'Male' => 'Male',
-                        'Female' => 'Female',
-                    ])
-                    ->required(),
-                Forms\Components\DatePicker::make('date_of_birth')
-                    ->required(),
-                Forms\Components\TextInput::make('age')
-                    ->disabled(), // age can be calculated, optional
-                Forms\Components\Textarea::make('home_address')
-                    ->required(),
+                Forms\Components\Section::make('Personal Information')
+                    ->schema([
+                        Forms\Components\TextInput::make('full_name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('email')
+                            ->email()
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('phone')
+                            ->required()
+                            ->maxLength(20),
+                        Forms\Components\Select::make('gender')
+                            ->options([
+                                'Male' => 'Male',
+                                'Female' => 'Female',
+                            ])
+                            ->required(),
+                        Forms\Components\TextInput::make('age')
+                            ->required()
+                            ->numeric()
+                            ->minValue(0),
+                        Forms\Components\Textarea::make('home_address')
+                            ->required(),
+                    ])->columns(2),
 
-                // Church Information
-                Forms\Components\TextInput::make('church_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('church_location')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('pastor_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('pastor_contact')
-                    ->required()
-                    ->maxLength(20),
+                Forms\Components\Section::make('Church Information')
+                    ->schema([
+                        Forms\Components\TextInput::make('church_name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('church_location')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('pastor_name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('pastor_contact')
+                            ->required()
+                            ->maxLength(20),
+                    ])->columns(2),
 
-                // Emergency / Next of Kin
-                Forms\Components\TextInput::make('next_of_kin_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('next_of_kin_relationship')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('next_of_kin_phone')
-                    ->required()
-                    ->maxLength(20),
-                Forms\Components\Textarea::make('next_of_kin_address'),
+                Forms\Components\Section::make('Next of Kin')
+                    ->schema([
+                        Forms\Components\TextInput::make('next_of_kin_name')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('next_of_kin_relationship')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('next_of_kin_phone')
+                            ->required()
+                            ->maxLength(20),
+                    ])->columns(2),
 
-                // Spiritual Info (optional)
-                Forms\Components\TextInput::make('baptized')
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('ministry_interest')
-                    ->maxLength(255),
-
-                // Status
-                Forms\Components\Select::make('status')
-                    ->options([
-                        'Pending' => 'Pending',
-                        'Active' => 'Active',
-                        'Inactive' => 'Inactive',
-                    ])
-                    ->default('Pending')
-                    ->required(),
+                Forms\Components\Section::make('Status')
+                    ->schema([
+                        Forms\Components\Select::make('status')
+                            ->options([
+                                'Pending' => 'Pending',
+                                'Active' => 'Active',
+                                'Inactive' => 'Inactive',
+                            ])
+                            ->default('Pending')
+                            ->required(),
+                    ]),
             ]);
     }
 
@@ -94,17 +94,39 @@ class MembershipResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('first_name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('last_name')->sortable()->searchable(),
-                Tables\Columns\TextColumn::make('email')->sortable()->searchable(),
+                Tables\Columns\TextColumn::make('full_name')
+                    ->sortable()
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('phone'),
-                Tables\Columns\TextColumn::make('status')->sortable(),
-                Tables\Columns\TextColumn::make('created_at')->dateTime('M d, Y')->sortable(),
+                Tables\Columns\TextColumn::make('gender'),
+                Tables\Columns\TextColumn::make('age'),
+
+                BadgeColumn::make('status')
+                    ->colors([
+                        'primary' => 'Pending',
+                        'success' => 'Active',
+                        'danger' => 'Inactive',
+                    ])
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Joined')
+                    ->dateTime('M d, Y')
+                    ->sortable(),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        'Pending' => 'Pending',
+                        'Active' => 'Active',
+                        'Inactive' => 'Inactive',
+                    ]),
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
@@ -119,6 +141,7 @@ class MembershipResource extends Resource
             'index' => Pages\ListMemberships::route('/'),
             'create' => Pages\CreateMembership::route('/create'),
             'edit' => Pages\EditMembership::route('/{record}/edit'),
+                // The View page is automatically handled by `ViewAction` in Filament
         ];
     }
 }

@@ -9,7 +9,6 @@ class Membership extends Model
 {
     use HasFactory;
 
-    // Mass assignable attributes
     protected $fillable = [
         'full_name',
         'email',
@@ -27,12 +26,6 @@ class Membership extends Model
         'status',
     ];
 
-    // Cast date_of_birth as a Carbon instance
-    protected $casts = [
-        'date_of_birth' => 'date',
-    ];
-
-    // Default attributes
     protected $attributes = [
         'status' => 'Pending',
     ];
