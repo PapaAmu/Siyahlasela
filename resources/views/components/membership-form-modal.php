@@ -1,133 +1,167 @@
-<div x-data="{ open: false }">
-    <!-- Button to open modal -->
+<div x-data="membershipModal()" x-cloak>
+    <!-- Enhanced Button -->
     <button 
-        @click="open = true"
-        class="mt-6 w-full max-w-sm mx-auto bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-md transition"
+        @click="openModal()"
+        class="apply-btn"
         type="button"
     >
-        Apply for Membership
+        <span class="btn-content">
+            🚀 Apply for Membership
+            <svg class="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+        </span>
+        <span class="btn-shine"></span>
     </button>
 
-    <!-- Modal backdrop -->
+    <!-- Modal Backdrop -->
     <div
         x-show="open"
-        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        class="modal-backdrop"
         x-transition.opacity
-        @click.self="open = false"
+        @click.self="closeModal()"
+        @keydown.escape="closeModal()"
     >
-        <!-- Modal content -->
-        <div 
-            class="bg-white rounded-lg shadow-lg max-w-xl w-full p-6 overflow-y-auto max-h-[90vh]"
-            x-transition
-        >
-            <h2 class="text-2xl font-bold mb-4 text-center">Membership Application Form</h2>
+        <!-- Modern Modal Content -->
+        <div class="modal-content" x-transition>
+            <!-- Header with gradient -->
+            <div class="modal-header">
+                <div class="header-icon">👑</div>
+                <h2 class="modal-title">Premium Membership Application</h2>
+                <p class="modal-subtitle">Join our exclusive community today</p>
+                
+                <button @click="closeModal()" class="close-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
 
-            <form action="{{ route('membership.submit') }}" method="POST" class="space-y-6">
+            <form action="{{ route('membership.submit') }}" method="POST" class="form">
                 @csrf
 
-                {{-- First Name --}}
-                <div>
-                    <label for="first_name" class="block text-sm font-medium text-gray-700">
-                        First Name <span class="text-red-600">*</span>
-                    </label>
-                    <input 
-                        type="text" 
-                        name="first_name" 
-                        id="first_name" 
-                        value="{{ old('first_name') }}" 
-                        required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                    />
-                    @error('first_name') 
-                      <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                <!-- Two-column layout for names -->
+                <div class="form-grid">
+                    {{-- First Name --}}
+                    <div class="form-group">
+                        <label for="first_name" class="form-label">
+                            <span class="label-icon">👤</span>
+                            First Name <span class="required">*</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                name="first_name" 
+                                id="first_name" 
+                                value="{{ old('first_name') }}" 
+                                required
+                                class="form-input"
+                                placeholder="John"
+                            />
+                            <span class="input-icon">✓</span>
+                        </div>
+                        @error('first_name') 
+                            <p class="error-msg">⚠ {{ $message }}</p>
+                        @enderror
+                    </div>
 
-                {{-- Last Name --}}
-                <div>
-                    <label for="last_name" class="block text-sm font-medium text-gray-700">
-                        Last Name <span class="text-red-600">*</span>
-                    </label>
-                    <input 
-                        type="text" 
-                        name="last_name" 
-                        id="last_name" 
-                        value="{{ old('last_name') }}" 
-                        required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                    />
-                    @error('last_name') 
-                      <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
-                    @enderror
+                    {{-- Last Name --}}
+                    <div class="form-group">
+                        <label for="last_name" class="form-label">
+                            <span class="label-icon">👥</span>
+                            Last Name <span class="required">*</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                name="last_name" 
+                                id="last_name" 
+                                value="{{ old('last_name') }}" 
+                                required
+                                class="form-input"
+                                placeholder="Doe"
+                            />
+                            <span class="input-icon">✓</span>
+                        </div>
+                        @error('last_name') 
+                            <p class="error-msg">⚠ {{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
 
                 {{-- Email --}}
-                <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">
-                        Email <span class="text-red-600">*</span>
+                <div class="form-group">
+                    <label for="email" class="form-label">
+                        <span class="label-icon">📧</span>
+                        Email <span class="required">*</span>
                     </label>
-                    <input 
-                        type="email" 
-                        name="email" 
-                        id="email" 
-                        value="{{ old('email') }}" 
-                        required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                    />
+                    <div class="input-wrapper">
+                        <input 
+                            type="email" 
+                            name="email" 
+                            id="email" 
+                            value="{{ old('email') }}" 
+                            required
+                            class="form-input"
+                            placeholder="john.doe@example.com"
+                        />
+                        <span class="input-icon">✉</span>
+                    </div>
                     @error('email') 
-                      <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
+                        <p class="error-msg">⚠ {{ $message }}</p>
                     @enderror
                 </div>
 
                 {{-- Phone --}}
-                <div>
-                    <label for="phone" class="block text-sm font-medium text-gray-700">
-                        Phone Number <span class="text-red-600">*</span>
+                <div class="form-group">
+                    <label for="phone" class="form-label">
+                        <span class="label-icon">📞</span>
+                        Phone Number <span class="required">*</span>
                     </label>
-                    <input 
-                        type="text" 
-                        name="phone" 
-                        id="phone" 
-                        value="{{ old('phone') }}" 
-                        required
-                        class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-                    />
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            name="phone" 
+                            id="phone" 
+                            value="{{ old('phone') }}" 
+                            required
+                            class="form-input"
+                            placeholder="+1 (555) 123-4567"
+                        />
+                        <span class="input-icon">📱</span>
+                    </div>
                     @error('phone') 
-                      <p class="text-red-600 text-xs mt-1">{{ $message }}</p>
+                        <p class="error-msg">⚠ {{ $message }}</p>
                     @enderror
                 </div>
 
                 {{-- Terms --}}
-                <div class="flex items-start">
-                    <div class="flex items-center h-5">
-                        <input id="terms" name="terms" type="checkbox" required
-                            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded">
-                    </div>
-                    <div class="ml-3 text-sm">
-                        <label for="terms" class="font-medium text-gray-700">
-                            I agree to the <a href="{{ route('terms') }}" class="text-indigo-600 underline">terms and conditions</a>
-                            <span class="text-red-600">*</span>
-                        </label>
-                    </div>
+                <div class="terms-group">
+                    <label class="terms-label">
+                        <input id="terms" name="terms" type="checkbox" required class="terms-checkbox">
+                        <span class="checkmark"></span>
+                        <span class="terms-text">
+                            I agree to the <a href="{{ route('terms') }}" class="terms-link">terms and conditions</a> 
+                            <span class="required">*</span>
+                        </span>
+                    </label>
                 </div>
-                @error('terms') <p class="text-red-600 text-xs mt-1">{{ $message }}</p> @enderror
+                @error('terms') <p class="error-msg">⚠ {{ $message }}</p> @enderror
 
-                <div class="flex justify-end space-x-4">
-                    <button 
-                        type="button" 
-                        @click="open = false"
-                        class="py-2 px-4 rounded border border-gray-300 hover:bg-gray-100"
-                    >
+                <div class="form-actions">
+                    <button type="button" @click="closeModal()" class="cancel-btn">
                         Cancel
                     </button>
-                    <button 
-                        type="submit"
-                        class="py-2 px-6 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
-                    >
-                        Submit
+                    <button type="submit" class="submit-btn">
+                        🚀 Submit Application
                     </button>
                 </div>
             </form>
+
+            <!-- Footer -->
+            <div class="modal-footer">
+                <p class="footer-text">🔒 Your information is secure and encrypted</p>
+            </div>
         </div>
     </div>
 </div>
