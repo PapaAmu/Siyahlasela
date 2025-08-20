@@ -13,7 +13,7 @@
     }
 
     .about-hero {
-        background: linear-gradient(rgba(79, 70, 229, 0.9), rgba(79, 70, 229, 0.8)), url('https://images.unsplash.com/photo-1534330192372-508c14ff043d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80');
+        background: linear-gradient(rgba(79, 70, 229, 0.9), rgba(79, 70, 229, 0.8)), url('https://i.pinimg.com/1200x/e6/0f/3a/e60f3ab5208d1db6987e58a8fe89025f.jpg');
         background-size: cover;
         background-position: center;
         color: white;
