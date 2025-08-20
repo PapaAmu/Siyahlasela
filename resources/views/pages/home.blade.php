@@ -60,6 +60,129 @@
   <x-about-banner />
   <x-programmes />
 
+  <!-- Event Countdown Card -->
+  @php
+    use App\Models\Event;
+    use Carbon\Carbon;
+    $today = now()->format('Y-m-d');
+    $closestEvent = Event::published()
+                        ->where('date', '>=', $today)
+                        ->orderBy('date', 'asc')
+                        ->orderBy('time', 'asc')
+                        ->first();
+  @endphp
+  
+  @if($closestEvent)
+  <div id="countdown-container" class="fixed bottom-6 right-6 z-50 transition-all duration-300">
+    <!-- Toggle Button (visible when countdown is hidden) -->
+    <button id="countdown-toggle" class="hidden bg-red-600 text-white p-3 rounded-full shadow-lg mb-2 hover:bg-indigo-700 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </button>
+    
+    <!-- Countdown Card -->
+    <div id="countdown-card" class="w-80 bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200 transform transition-transform duration-300">
+      <div class="bg-red-600 p-3 text-white flex justify-between items-center">
+        <div>
+          <h3 class="font-bold text-lg"> {{ $closestEvent->title }} starts in</h3>
+          {{-- <p class="text-sm">{{ $closestEvent->date->format('F j, Y') }} at {{ Carbon::parse($closestEvent->time)->format('g:i A') }}</p> --}}
+        </div>
+        <button id="countdown-close" class="text-white hover:text-indigo-200 transition-colors">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="p-4">
+        <div class="flex justify-between text-center mb-4">
+          <div class="flex-1">
+            <div id="countdown-days" class="text-2xl font-bold text-indigo-600">00</div>
+            <div class="text-xs text-gray-500">Days</div>
+          </div>
+          <div class="flex-1">
+            <div id="countdown-hours" class="text-2xl font-bold text-indigo-600">00</div>
+            <div class="text-xs text-gray-500">Hours</div>
+          </div>
+          <div class="flex-1">
+            <div id="countdown-minutes" class="text-2xl font-bold text-indigo-600">00</div>
+            <div class="text-xs text-gray-500">Minutes</div>
+          </div>
+          <div class="flex-1">
+            <div id="countdown-seconds" class="text-2xl font-bold text-indigo-600">00</div>
+            <div class="text-xs text-gray-500">Seconds</div>
+          </div>
+        </div>
+        <a href="{{ route('events') }}" class="block w-full bg-indigo-600 hover:bg-indigo-700 text-white text-center py-2 rounded-md font-semibold transition-colors">
+          View All Events
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set the date we're counting down to
+      const eventDate = new Date("{{ $closestEvent->date->format('M d, Y') }} {{ $closestEvent->time }}").getTime();
+      
+      // Update the countdown every 1 second
+      const countdownFunction = setInterval(function() {
+        // Get today's date and time
+        const now = new Date().getTime();
+        
+        // Find the distance between now and the event date
+        const distance = eventDate - now;
+        
+        // If the countdown is over, hide the element
+        if (distance < 0) {
+          clearInterval(countdownFunction);
+          document.getElementById("countdown-container").style.display = "none";
+          return;
+        }
+        
+        // Time calculations for days, hours, minutes and seconds
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        
+        // Display the results
+        document.getElementById("countdown-days").innerHTML = days.toString().padStart(2, '0');
+        document.getElementById("countdown-hours").innerHTML = hours.toString().padStart(2, '0');
+        document.getElementById("countdown-minutes").innerHTML = minutes.toString().padStart(2, '0');
+        document.getElementById("countdown-seconds").innerHTML = seconds.toString().padStart(2, '0');
+      }, 1000);
+      
+      // Toggle functionality
+      const countdownCard = document.getElementById('countdown-card');
+      const countdownToggle = document.getElementById('countdown-toggle');
+      const countdownClose = document.getElementById('countdown-close');
+      
+      // Check if user has previously hidden the countdown
+      const isCountdownHidden = localStorage.getItem('countdownHidden') === 'true';
+      
+      if (isCountdownHidden) {
+        countdownCard.classList.add('hidden');
+        countdownToggle.classList.remove('hidden');
+      }
+      
+      // Close button event
+      countdownClose.addEventListener('click', function() {
+        countdownCard.classList.add('hidden');
+        countdownToggle.classList.remove('hidden');
+        localStorage.setItem('countdownHidden', 'true');
+      });
+      
+      // Toggle button event
+      countdownToggle.addEventListener('click', function() {
+        countdownCard.classList.remove('hidden');
+        countdownToggle.classList.add('hidden');
+        localStorage.setItem('countdownHidden', 'false');
+      });
+    });
+  </script>
+  @endif
+
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const slides = document.querySelectorAll('.slide');

@@ -9,13 +9,25 @@
 
       <!-- Desktop Nav -->
       <div class="hidden md:flex space-x-6 items-center">
-        <a href="{{ route('home') }}" class="text-gray-700 hover:text-indigo-600 transition-colors duration-200 {{ request()->routeIs('home') ? 'font-bold text-red-600 border-b-2 border-red-600' : '' }}">Home</a>
-        <a href="{{ route('about') }}" class="text-gray-700 hover:text-indigo-600 transition-colors duration-200 {{ request()->routeIs('about') ? 'font-bold text-red-600 border-b-2 border-red-600' : '' }}">About</a>
-        <a href="{{ route('programs') }}" class="text-gray-700 hover:text-indigo-600 transition-colors duration-200 {{ request()->routeIs('programs') ? 'font-bold text-red-600 border-b-2 border-red-600' : '' }}">Programs</a>
-        <a href="{{ route('events') }}" class="text-gray-700 hover:text-indigo-600 transition-colors duration-200 {{ request()->routeIs('events') ? 'font-bold text-red-600 border-b-2 border-red-600' : '' }}">Events</a>
-        <a href="{{ route('membership') }}" class="text-gray-700 hover:text-indigo-600 transition-colors duration-200 {{ request()->routeIs('membership') ? 'font-bold text-red-600 border-b-2 border-red-600' : '' }}">Membership</a>
-        <a href="{{ route('contact') }}" class="text-gray-700 hover:text-indigo-600 transition-colors duration-200 {{ request()->routeIs('contact') ? 'font-bold text-red-600 border-b-2 border-red-600' : '' }}">Contact</a>
-        <a href="{{ route('filament.admin.auth.login') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full transition-colors duration-200">Login</a>
+        <a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'nav-active' : '' }}">
+          <span>Home</span>
+        </a>
+        <a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') ? 'nav-active' : '' }}">
+          <span>About</span>
+        </a>
+        <a href="{{ route('programs') }}" class="nav-link {{ request()->routeIs('programs') ? 'nav-active' : '' }}">
+          <span>Programs</span>
+        </a>
+        <a href="{{ route('events') }}" class="nav-link {{ request()->routeIs('events') ? 'nav-active' : '' }}">
+          <span>Events</span>
+        </a>
+        <a href="{{ route('membership') }}" class="nav-link {{ request()->routeIs('membership') ? 'nav-active' : '' }}">
+          <span>Membership</span>
+        </a>
+        <a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'nav-active' : '' }}">
+          <span>Contact</span>
+        </a>
+        <a href="{{ route('filament.admin.auth.login') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full transition-colors duration-300 transform hover:scale-105">Login</a>
       </div>
 
       <!-- Mobile Menu Button -->
@@ -58,19 +70,99 @@
       class="absolute right-0 top-0 h-full w-64 bg-white shadow-lg p-6 z-50 overflow-y-auto"
     >
       <div class="flex flex-col space-y-5 mt-10">
-        <a href="{{ route('home') }}" class="text-gray-700 hover:text-red-600 transition-colors duration-200 py-2 {{ request()->routeIs('home') ? 'font-bold text-red-600 border-l-4 border-red-600 pl-3' : 'pl-4' }}">Home</a>
-        <a href="{{ route('about') }}" class="text-gray-700 hover:text-red-600 transition-colors duration-200 py-2 {{ request()->routeIs('about') ? 'font-bold text-red-600 border-l-4 border-red-600 pl-3' : 'pl-4' }}">About</a>
-        <a href="{{ route('programs') }}" class="text-gray-700 hover:text-red-600 transition-colors duration-200 py-2 {{ request()->routeIs('programs') ? 'font-bold text-red-600 border-l-4 border-red-600 pl-3' : 'pl-4' }}">Programs</a>
-        <a href="{{ route('events') }}" class="text-gray-700 hover:text-red-600 transition-colors duration-200 py-2 {{ request()->routeIs('events') ? 'font-bold text-red-600 border-l-4 border-red-600 pl-3' : 'pl-4' }}">Events</a>
-        <a href="{{ route('membership') }}" class="text-gray-700 hover:text-red-600 transition-colors duration-200 py-2 {{ request()->routeIs('membership') ? 'font-bold text-red-600 border-l-4 border-red-600 pl-3' : 'pl-4' }}">Membership</a>
-        <a href="{{ route('contact') }}" class="text-gray-700 hover:text-red-600 transition-colors duration-200 py-2 {{ request()->routeIs('contact') ? 'font-bold text-red-600 border-l-4 border-red-600 pl-3' : 'pl-4' }}">Contact</a>
+        <a href="{{ route('home') }}" class="mobile-nav-link {{ request()->routeIs('home') ? 'mobile-nav-active' : '' }}">Home</a>
+        <a href="{{ route('about') }}" class="mobile-nav-link {{ request()->routeIs('about') ? 'mobile-nav-active' : '' }}">About</a>
+        <a href="{{ route('programs') }}" class="mobile-nav-link {{ request()->routeIs('programs') ? 'mobile-nav-active' : '' }}">Programs</a>
+        <a href="{{ route('events') }}" class="mobile-nav-link {{ request()->routeIs('events') ? 'mobile-nav-active' : '' }}">Events</a>
+        <a href="{{ route('membership') }}" class="mobile-nav-link {{ request()->routeIs('membership') ? 'mobile-nav-active' : '' }}">Membership</a>
+        <a href="{{ route('contact') }}" class="mobile-nav-link {{ request()->routeIs('contact') ? 'mobile-nav-active' : '' }}">Contact</a>
         <div class="pt-4 border-t border-gray-200 mt-4">
-          <a href="{{ route('filament.admin.auth.login') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full transition-colors duration-200 block text-center">Login</a>
+          <a href="{{ route('filament.admin.auth.login') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full transition-colors duration-300 transform hover:scale-105 block text-center">Login</a>
         </div>
       </div>
     </div>
   </div>
 </nav>
+
+<style>
+  /* Navigation Link Styles */
+  .nav-link {
+    position: relative;
+    color: #374151;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link:hover {
+    color: #4f46e5;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #4f46e5;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Active state */
+  .nav-active {
+    color: #dc2626 !important;
+    font-weight: 700 !important;
+  }
+  
+  .nav-active::after {
+    width: 100% !important;
+    background-color: #dc2626 !important;
+    animation: pulseLine 2s infinite;
+  }
+  
+  /* Mobile Navigation */
+  .mobile-nav-link {
+    position: relative;
+    color: #374151;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+  }
+  
+  .mobile-nav-link:hover {
+    color: #4f46e5;
+    padding-left: 1.5rem;
+  }
+  
+  .mobile-nav-active {
+    color: #dc2626 !important;
+    font-weight: 700 !important;
+    border-left-color: #dc2626 !important;
+    background-color: #fef2f2;
+  }
+  
+  /* Animation for active underline */
+  @keyframes pulseLine {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+</style>
 
 <script>
 // Initialize Alpine.js after the page loads
