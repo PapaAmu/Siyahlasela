@@ -495,7 +495,7 @@
         <!-- About Hero Section -->
         <section class="about-hero">
             <div class="container">
-                <h1>About Siyahlasela Christian Movement</h1>
+                <h1>Siyahlasela Christian Movement</h1>
                 <p>For over two years, we have been united in Christ, serving our communities with faith, love, and
                     compassion.</p>
             </div>
@@ -628,7 +628,7 @@
                 <div class="leaders-grid">
                     <div class="leader-card">
                         <div class="leader-image"
-                            style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1674&q=80');">
+                            style="background-image: url('/images/team_members/ps_mathebula.webp');">
                         </div>
                         <div class="leader-info">
                             <h3 class="leader-name">Pastor David Mathebula</h3>
@@ -638,7 +638,7 @@
                     </div>
                     <div class="leader-card">
                         <div class="leader-image"
-                            style="background-image: url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1676&q=80');">
+                            style="background-image: url('/images/team_members/ps_mashego.webp');">
                         </div>
                         <div class="leader-info">
                             <h3 class="leader-name">Pastor Clayton Mashego</h3>
@@ -648,7 +648,7 @@
                     </div>
                     <div class="leader-card">
                         <div class="leader-image"
-                            style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1674&q=80');">
+                            style="background-image: url('/images/team_members/ps_ndlovu.webp');">
                         </div>
                         <div class="leader-info">
                             <h3 class="leader-name">Pastor Godfrey Ndlovu</h3>
@@ -658,7 +658,7 @@
                     </div>
                     <div class="leader-card">
                         <div class="leader-image"
-                            style="background-image: url('https://images.unsplash.com/photo-1551836026-d5c8c5ab235e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1674&q=80');">
+                            style="background-image: url('/images/team_members/ps_maluleke.webp">
                         </div>
                         <div class="leader-info">
                             <h3 class="leader-name">Pastor Carol Maluleke</h3>
