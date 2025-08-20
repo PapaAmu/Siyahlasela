@@ -26,7 +26,7 @@
         }
         
         .events-hero {
-            background: linear-gradient(rgba(79, 70, 229, 0.9), rgba(79, 70, 229, 0.8)), url('https://images.unsplash.com/photo-1534330192372-508c14ff043d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80');
+            background: linear-gradient(rgba(79, 70, 229, 0.9), rgba(79, 70, 229, 0.8)), url('https://i.pinimg.com/1200x/be/d6/af/bed6af3bc76d370b26727ae68ab3b8e2.jpg');
             background-size: cover;
             background-position: center;
             color: white;

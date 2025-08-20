@@ -9,7 +9,7 @@
         /* Custom styles to match your About page */
         body {
             font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-            background: url('https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center fixed;
+            background: url('https://i.pinimg.com/736x/7b/2d/28/7b2d2859362a99766574c77760344940.jpg') no-repeat center center fixed;
             background-size: cover;
             position: relative;
         }
@@ -26,7 +26,7 @@
         }
         
         .contact-hero {
-            background: linear-gradient(rgba(79, 70, 229, 0.9), rgba(79, 70, 229, 0.8)), url('https://images.unsplash.com/photo-1534330192372-508c14ff043d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1770&q=80');
+            background: linear-gradient(rgba(79, 70, 229, 0.9), rgba(79, 70, 229, 0.8)), url('https://i.pinimg.com/736x/ac/ad/ef/acadef5c01abf695f9fe5b021deefade.jpg');
             background-size: cover;
             background-position: center;
             color: white;
