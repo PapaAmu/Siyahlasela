@@ -9,25 +9,25 @@
 
       <!-- Desktop Nav -->
       <div class="hidden md:flex space-x-6 items-center">
-        <a href="{{ route('home') }}" class="text-gray-700 hover:text-indigo-600">Home</a>
-        <a href="{{ route('about') }}" class="text-gray-700 hover:text-indigo-600">About</a>
-        <a href="{{ route('programs') }}" class="text-gray-700 hover:text-indigo-600">Programs</a>
-        <a href="{{ route('events') }}" class="text-gray-700 hover:text-indigo-600">Events</a>
-        <a href="{{ route('membership') }}" class="text-gray-700 hover:text-indigo-600">Membership</a>
-        <a href="{{ route('contact') }}" class="text-gray-700 hover:text-indigo-600">Contact</a>
-        <a href="{{ route('filament.admin.auth.login') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full">Login</a>
+        <a href="{{ route('home') }}" class="text-gray-700 hover:text-indigo-600 transition-colors duration-200 {{ request()->routeIs('home') ? 'font-bold text-red-600 border-b-2 border-red-600' : '' }}">Home</a>
+        <a href="{{ route('about') }}" class="text-gray-700 hover:text-indigo-600 transition-colors duration-200 {{ request()->routeIs('about') ? 'font-bold text-red-600 border-b-2 border-red-600' : '' }}">About</a>
+        <a href="{{ route('programs') }}" class="text-gray-700 hover:text-indigo-600 transition-colors duration-200 {{ request()->routeIs('programs') ? 'font-bold text-red-600 border-b-2 border-red-600' : '' }}">Programs</a>
+        <a href="{{ route('events') }}" class="text-gray-700 hover:text-indigo-600 transition-colors duration-200 {{ request()->routeIs('events') ? 'font-bold text-red-600 border-b-2 border-red-600' : '' }}">Events</a>
+        <a href="{{ route('membership') }}" class="text-gray-700 hover:text-indigo-600 transition-colors duration-200 {{ request()->routeIs('membership') ? 'font-bold text-red-600 border-b-2 border-red-600' : '' }}">Membership</a>
+        <a href="{{ route('contact') }}" class="text-gray-700 hover:text-indigo-600 transition-colors duration-200 {{ request()->routeIs('contact') ? 'font-bold text-red-600 border-b-2 border-red-600' : '' }}">Contact</a>
+        <a href="{{ route('filament.admin.auth.login') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full transition-colors duration-200">Login</a>
       </div>
 
       <!-- Mobile Menu Button -->
       <div class="md:hidden flex justify-end w-full">
-        <button @click="open = !open" class="text-gray-700 hover:text-indigo-600 focus:outline-none z-50 relative">
+        <button @click="open = !open" class="text-gray-700 hover:text-indigo-600 focus:outline-none z-50 relative transition-colors duration-200">
           <svg x-show="!open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
           <svg x-show="open" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-               viewBox="0 0 24 24" stroke="currentColor">
+               viewBox="0 0 24 24" stroke="currentColor" style="display: none;">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M6 18L18 6M6 6l12 12"/>
           </svg>
@@ -55,17 +55,29 @@
       x-transition:leave="transition ease-in duration-200 transform"
       x-transition:leave-start="translate-x-0"
       x-transition:leave-end="translate-x-full"
-      class="absolute right-0 top-0 h-full w-64 bg-white shadow-md p-6 z-50"
+      class="absolute right-0 top-0 h-full w-64 bg-white shadow-lg p-6 z-50 overflow-y-auto"
     >
-      <div class="flex flex-col space-y-4">
-        <a href="{{ route('home') }}" class="text-gray-700 hover:text-indigo-600">Home</a>
-        <a href="{{ route('about') }}" class="text-gray-700 hover:text-indigo-600">About</a>
-        <a href="{{ route('programs') }}" class="text-gray-700 hover:text-indigo-600">Programs</a>
-        <a href="{{ route('events') }}" class="text-gray-700 hover:text-indigo-600">Events</a>
-        <a href="{{ route('membership') }}" class="text-gray-700 hover:text-indigo-600">Membership</a>
-        <a href="{{ route('contact') }}" class="text-gray-700 hover:text-indigo-600">Contact</a>
-        <a href="{{ route('filament.admin.auth.login') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full">Login</a>
+      <div class="flex flex-col space-y-5 mt-10">
+        <a href="{{ route('home') }}" class="text-gray-700 hover:text-red-600 transition-colors duration-200 py-2 {{ request()->routeIs('home') ? 'font-bold text-red-600 border-l-4 border-red-600 pl-3' : 'pl-4' }}">Home</a>
+        <a href="{{ route('about') }}" class="text-gray-700 hover:text-red-600 transition-colors duration-200 py-2 {{ request()->routeIs('about') ? 'font-bold text-red-600 border-l-4 border-red-600 pl-3' : 'pl-4' }}">About</a>
+        <a href="{{ route('programs') }}" class="text-gray-700 hover:text-red-600 transition-colors duration-200 py-2 {{ request()->routeIs('programs') ? 'font-bold text-red-600 border-l-4 border-red-600 pl-3' : 'pl-4' }}">Programs</a>
+        <a href="{{ route('events') }}" class="text-gray-700 hover:text-red-600 transition-colors duration-200 py-2 {{ request()->routeIs('events') ? 'font-bold text-red-600 border-l-4 border-red-600 pl-3' : 'pl-4' }}">Events</a>
+        <a href="{{ route('membership') }}" class="text-gray-700 hover:text-red-600 transition-colors duration-200 py-2 {{ request()->routeIs('membership') ? 'font-bold text-red-600 border-l-4 border-red-600 pl-3' : 'pl-4' }}">Membership</a>
+        <a href="{{ route('contact') }}" class="text-gray-700 hover:text-red-600 transition-colors duration-200 py-2 {{ request()->routeIs('contact') ? 'font-bold text-red-600 border-l-4 border-red-600 pl-3' : 'pl-4' }}">Contact</a>
+        <div class="pt-4 border-t border-gray-200 mt-4">
+          <a href="{{ route('filament.admin.auth.login') }}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-6 rounded-full transition-colors duration-200 block text-center">Login</a>
+        </div>
       </div>
     </div>
   </div>
 </nav>
+
+<script>
+// Initialize Alpine.js after the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  // This ensures the mobile menu works properly
+  if (typeof Alpine === 'undefined') {
+    console.warn('Alpine.js is not loaded. The mobile menu will not work.');
+  }
+});
+</script>

@@ -401,7 +401,7 @@
 
         .cta-section p {
             font-size: 1.1rem;
-            padding: 0 20px;
+            padding: 20px;
         }
 
         .cta-buttons {
